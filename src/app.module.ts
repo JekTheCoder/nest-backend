@@ -10,12 +10,19 @@ import { TypeOrmConfigService } from './config/type-orm-config.service';
 
 @Module({
   imports: [
-    UsersModule, 
-    ConfigModule.forRoot({ load: [configuration], envFilePath:[!process.env.NODE_ENV ? '.env' : `enviroments/${process.env.NODE_ENV}.env`] }),
+    UsersModule,
+    ConfigModule.forRoot({
+      load: [configuration],
+      envFilePath: [
+        !process.env.NODE_ENV
+          ? '.env'
+          : `enviroments/${process.env.NODE_ENV}.env`,
+      ],
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useClass: TypeOrmConfigService
-    })
+      useClass: TypeOrmConfigService,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
