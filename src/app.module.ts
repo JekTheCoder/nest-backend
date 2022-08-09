@@ -7,7 +7,10 @@ import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 
 @Module({
-  imports: [UsersModule, ConfigModule.forRoot({ load: [configuration] })],
+  imports: [
+    UsersModule, 
+    ConfigModule.forRoot({ load: [configuration], envFilePath:[!process.env.NODE_ENV ? '.env' : `enviroments/${process.env.NODE_ENV}.env`] })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
