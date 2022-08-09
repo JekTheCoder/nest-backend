@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, HttpException, HttpStatus, Param, Post, UseInterceptors } from '@nestjs/common';
 import { UserRequest } from '../dto/user-request.dto';
 import { UsersService } from '../service/users.service';
 
@@ -11,6 +11,13 @@ export class UsersController {
   @Get()
   getAllUsers() {
     return this.userService.findAllUsers();
+  }
+
+  @Get(':id')
+  async getOneUserById(@Param('id') id: number) {
+    const result = await this.userService.findOneById(id);
+    if (result === null) throw new HttpException('user not found', HttpStatus.NOT_FOUND)
+    return result;
   }
 
   @Post()
