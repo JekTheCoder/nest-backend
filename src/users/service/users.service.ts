@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { UserRequest } from '../dto/user-request.dto';
 
 @Injectable()
 export class UsersService {
@@ -22,10 +23,4 @@ export class UsersService {
     createOneUser(userReq: UserRequest) {
         this.userRepo.save(userReq);
     }
-}
-
-export interface UserRequest {
-    name: string,
-    username: string,
-    password: string
 }

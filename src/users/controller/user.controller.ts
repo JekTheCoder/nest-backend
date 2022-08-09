@@ -1,5 +1,6 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
-import { UserRequest, UsersService } from '../service/users.service';
+import { UserRequest } from '../dto/user-request.dto';
+import { UsersService } from '../service/users.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
