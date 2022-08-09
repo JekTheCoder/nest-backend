@@ -18,4 +18,14 @@ export class UsersService {
     findOneByUsername(username: string) {
         this.userRepo.findOneBy({ username });
     }
+
+    createOneUser(userReq: UserRequest) {
+        this.userRepo.save(userReq);
+    }
+}
+
+export interface UserRequest {
+    name: string,
+    username: string,
+    password: string
 }
