@@ -24,4 +24,10 @@ export class AuthService {
 
         return userTarget;
     }
+
+    sign(user: User) {
+        const payload = { username: user.username, sub: user.id };
+
+        return this.jwtService.signAsync(payload);
+    }
 }
