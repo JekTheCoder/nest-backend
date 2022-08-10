@@ -7,26 +7,25 @@ import { LoginAuthDto } from '../dto/login-auth-dto';
 
 @Injectable()
 export class AuthService {
+  constructor(
+    private userService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-    constructor (
-        private userService: UsersService,
-        private jwtService: JwtService
-    ) {}
+  async validateUser(login: LoginAuthDto) {
+    const userTarget = await this.userService.findOne({
+      username: login.username,
+    });
 
-    async validateUser(login: LoginAuthDto) {
-        const userTarget = await this.userService.findOne({ username: login.username });
+    if (!userTarget || !(await compare(login.password, userTarget.password)))
+      return null;
 
-        if (
-            !userTarget || 
-            !(await compare(login.password, userTarget.password))
-        ) return null;
+    return userTarget;
+  }
 
-        return userTarget;
-    }
+  sign(user: User) {
+    const payload = { username: user.username, sub: user.id };
 
-    sign(user: User) {
-        const payload = { username: user.username, sub: user.id };
-
-        return this.jwtService.signAsync(payload);
-    }
+    return this.jwtService.signAsync(payload);
+  }
 }

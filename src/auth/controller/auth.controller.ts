@@ -6,11 +6,11 @@ import { AuthService } from '../service/auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async loginUser(@User() user: User_) {
-        return { token: await this.authService.sign(user) };
-    }
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async loginUser(@User() user: User_) {
+    return { token: await this.authService.sign(user) };
+  }
 }

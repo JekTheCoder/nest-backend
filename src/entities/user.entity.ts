@@ -1,6 +1,12 @@
 import { genSaltSync, hashSync } from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
@@ -11,14 +17,14 @@ export class User {
   @Column({ unique: true }) username: string;
 
   @Exclude()
-  @Column() 
+  @Column()
   password: string;
 
   @CreateDateColumn() createdAt: Date;
 
   @BeforeInsert()
   setPassword() {
-    console.log('ad')
+    console.log('ad');
     const salt = genSaltSync();
     this.password = hashSync(this.password, salt);
   }

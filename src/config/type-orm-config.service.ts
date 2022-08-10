@@ -18,7 +18,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       port: this.configService.getOrThrow<number>('database.port'),
       type: this.configService.getOrThrow<DatabaseType>('database.db') as any,
       synchronize: this.configService.get<boolean>('database.sync'),
-      entities: [User]
+      entities: [User],
     };
   }
 }
