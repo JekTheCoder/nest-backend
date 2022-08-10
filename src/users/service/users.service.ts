@@ -24,4 +24,8 @@ export class UsersService {
         const user = this.userRepo.create(userReq);
         return await this.userRepo.save(user);
     }
+
+    deleteOneUser(condition: { id?: number, username?: string }) {
+        return this.userRepo.delete(condition);
+    }
 }
