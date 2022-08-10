@@ -21,9 +21,8 @@ export class UsersController {
   }
 
   @Post()
-  createOneUser(@Body() user: UserRequest) {
-    console.log(user);
-
-    this.userService.createOneUser(user);
+  async createOneUser(@Body() user: UserRequest) {
+    try { await this.userService.createOneUser(user); }
+    catch { throw new HttpException('User already exists', HttpStatus.BAD_REQUEST); }
   }
 }

@@ -20,7 +20,7 @@ export class UsersService {
         this.userRepo.findOneBy({ username });
     }
 
-    createOneUser(userReq: UserRequest) {
-        this.userRepo.save(userReq);
+    async createOneUser(userReq: UserRequest) {
+        await this.userRepo.save(userReq);
     }
 }
