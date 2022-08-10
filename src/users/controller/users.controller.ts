@@ -19,7 +19,7 @@ export class UsersController {
 
   @Get(':id')
   async getOneUserById(@Param('id') id: number) {
-    const result = await this.userService.findOneById(id);
+    const result = await this.userService.findOne({ id });
     if (result === null) throw new HttpException('user not found', HttpStatus.NOT_FOUND)
     return result;
   }

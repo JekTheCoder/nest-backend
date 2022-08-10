@@ -12,12 +12,9 @@ export class UsersService {
         return this.userRepo.find();
     }
 
-    findOneById(id: number) {
-        return this.userRepo.findOneBy({ id });
-    }
-
-    findOneByUsername(username: string) {
-        this.userRepo.findOneBy({ username });
+    findOne(user: Partial<User>) {
+        const { username, id } = user;
+        return this.userRepo.findOneBy({username, id});
     }
 
     async createOneUser(userReq: UserRequest) {
