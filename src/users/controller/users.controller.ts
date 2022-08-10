@@ -33,6 +33,6 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Delete()
   async deleteUser(@User() user: User_) {
-    console.log(user)
+    await this.userService.deleteOneUser(user);
   }
 }

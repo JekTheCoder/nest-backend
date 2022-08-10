@@ -26,6 +26,7 @@ export class UsersService {
     }
 
     deleteOneUser(condition: { id?: number, username?: string }) {
-        return this.userRepo.delete(condition);
+        const { id, username } = condition;
+        return this.userRepo.delete({id, username});
     }
 }
