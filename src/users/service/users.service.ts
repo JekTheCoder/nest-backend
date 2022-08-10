@@ -21,6 +21,7 @@ export class UsersService {
     }
 
     async createOneUser(userReq: UserRequest) {
-        await this.userRepo.save(userReq);
+        const user = this.userRepo.create(userReq);
+        return await this.userRepo.save(user);
     }
 }

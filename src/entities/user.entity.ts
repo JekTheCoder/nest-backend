@@ -17,8 +17,9 @@ export class User {
   @CreateDateColumn() createdAt: Date;
 
   @BeforeInsert()
-  setPassword(password: string) {
+  setPassword() {
+    console.log('ad')
     const salt = genSaltSync();
-    this.password = hashSync(password, salt);
+    this.password = hashSync(this.password, salt);
   }
 }
