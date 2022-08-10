@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
 export class LocalStrategyService extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) { super(); }
 
-    async validate(login: LoginAuthDto) {
-        const userResult = await this.authService.validateUser(login);
+    async validate(username: string, password: string) {
+        const userResult = await this.authService.validateUser({ username, password });
         if (!userResult) throw new UnauthorizedException();
 
         return userResult;
