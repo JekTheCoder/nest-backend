@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { Note } from 'src/entities/note.entity';
 import { User } from 'src/entities/user.entity';
 import { DatabaseType } from 'typeorm';
 
@@ -18,7 +19,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       port: this.configService.getOrThrow<number>('database.port'),
       type: this.configService.getOrThrow<DatabaseType>('database.db') as any,
       synchronize: this.configService.get<boolean>('database.sync'),
-      entities: [User],
+      entities: [User, Note],
     };
   }
 }
