@@ -22,6 +22,7 @@ export class NotesService {
     }
 
     async deleteOne(id: number, userId: number) {
-        await this.notesRepo.delete({ id, userId });
+        const result =  await this.notesRepo.delete({ id, userId });
+        return result.affected !== 0;
     }
 }
