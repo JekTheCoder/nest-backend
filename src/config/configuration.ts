@@ -9,4 +9,7 @@ export default () => ({
     name: process.env.DB_NAME,
     sync: process.env.DB_SYNC === 'true',
   },
+  jwt: {
+    token: process.env.TOKEN_SECRET
+  }
 });
